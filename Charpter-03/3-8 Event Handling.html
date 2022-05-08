@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Handling</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- <button @click="handleClick($event, 1, 2, 3)">
+            Button
+        </button> -->
+
+        <!-- <form action="/abc" @click.prevent>
+            <input type="submit">
+        </form> -->
+
+        <!-- self要求 click事件只在e.target == e.currentTarget才执行 -->
+        <!-- .once 只执行一次就解绑 -->
+        <!-- .capture 原先是冒泡机制，从内到外。capture改成捕获，从外到内。 -->
+        <!-- <div @click.self="handleClick">
+            nice
+            <div>hello world</div>
+        </div> -->
+
+        <!-- .enter .tab .delete .esc 按键修饰符，按下对应按键才执行 -->
+        <!-- .ctrl .alt .shift .meta 系统修饰符，按住对应按键才执行 -->
+        <!-- <input @keydown.ctrl="handleKeyDown"> -->
+
+        <!-- .right .left .middle 鼠标修饰符 -->
+        <div @click.right="handleClick">click</div>
+
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            methods: {
+                // handleClick: function(e, one, two, three) {
+                //      console.log(e, one, two, three);
+                // }
+
+                // handleClick: function(e) {
+                //     e.preventDefault();
+                // }
+
+                // handleClick: function() {
+                //     alert("123");
+                // }
+
+                // handleKeyDown: function(e) {
+                //     console.log(e.target.value);
+                // }
+
+                handleClick: function(e) {
+                    console.log(right);
+                }
+            },
+        })
+    </script>
+</body>
+</html>
