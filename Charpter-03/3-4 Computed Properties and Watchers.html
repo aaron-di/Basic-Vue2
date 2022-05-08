@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computed Properties and Watchers</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{ fullName }}
+        {{ age }}
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                firstName: "Aaron",
+                lastName: "Di",
+                age: "21",
+            },
+            // 计算属性
+            computed: {
+                fullName: {
+                    get: function() {
+                        return this.firstName + " " + this.lastName;
+                    },
+                    set: function(value) {
+                        var arr = value.split(" ");
+                        this.firstName = arr[0];
+                        this.lastName = arr[1];
+                    }
+                }
+            }
+
+            // 方法
+            // methods: {
+            //     fullName: function() {
+            //         console.log("计算了一次");
+            //         return this.firstName + this.lastName;
+            //     }
+            // },
+
+            // 监听器
+            // watch: {
+            //     firstName: function() {
+            //         console.log("计算了一次");
+            //         this.fullName = this.firstName + this.lastName;
+            //     },
+            //     lastName: function() {
+            //         console.log("计算了一次");
+            //         this.fullName = this.firstName + this.lastName;
+            //     }
+            // }
+        })
+    </script>
+</body>
+</html>
