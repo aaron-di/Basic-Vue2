@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conditional Rendering</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- <div v-if="show">{{ message }}</div>
+        <div v-else>Bye Bye</div>
+
+        <div v-show="show">{{ message }}</div> -->
+
+        <!-- <div v-if="show === 'a'">This is A</div>
+        <div v-else-if="show === 'b'">This is B</div>
+        <div v-else>This is others</div>√ -->
+
+        <div v-if="show">
+            用户名：<input key="username-input">
+        </div>
+        <div v-else>
+            邮箱地址：<input key="email-input">
+        </div>
+        
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                show: true,
+                message: "Hello World"
+            }
+        })
+    </script>
+</body>
+</html>
