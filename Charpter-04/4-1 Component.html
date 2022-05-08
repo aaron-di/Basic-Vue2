@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Component</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- 使用 is="" 解决标签定义的bug -->
+        <table>
+            <tbody>
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+            </tbody>
+        </table>
+
+
+        <!-- 有关ref的使用 -->
+        <!-- <div ref="hello" @click="handleClick">Hello World</div> -->
+        
+        <counter ref="one" @change="handleChange"></counter>
+        <counter ref="two" @change="handleChange"></counter>
+        <div>{{ total }}</div>
+    </div>
+
+    <script>
+        Vue.component("row", {
+            // 子组件定义data，data必须是函数
+            data: function () {
+                return {
+                    content: "This is a row",
+                };
+            },
+            template: '<tr><td>{{ content }}</td></tr>',
+        });
+
+        Vue.component("counter", {
+            template: '<div @click="handleClick">{{ number }}</div>',
+            data: function () {
+                return {
+                    number: 0,
+                };
+            },
+            methods: {
+                handleClick: function() {
+                    this.number++;
+                    this.$emit('change');
+                },
+            },
+        });
+
+        var vm = new Vue({
+            el: "#root",
+            data: {
+                total: 0,
+            },
+            methods: {
+                // handleClick: function () {
+                //     console.log(this.$refs.hello.innerHTML);
+                // },
+                handleChange: function() {
+                    console.log(this.$refs.one.number);
+                    console.log(this.$refs.two.number);
+                    this.total = this.$refs.one.number + this.$refs.two.number;
+                }
+            },
+        });
+    </script>
+</body>
+</html>
