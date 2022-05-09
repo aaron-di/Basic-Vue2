@@ -4,46 +4,37 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Animate.css</title>
+    <title>Transition and Animation</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <script src="../vue.js"></script>
     <style>
-        /* @keyframes bounce-in {
-            0% {
-                transform: scale(0);
-            }
-            50% {
-                transform: scale(1.5);
-            }
-            100% {
-                transform: scale(1);
-            }
-        } */
-        
-        /* .fade-enter-active {
-        transform-origin: left center;
-        animation: bounce-in 1s;
-    }
-    .fade-leave-active {
-        transform-origin: left center;
-        animation: bounce-in 1s reverse;
-    } */
+        .fade-enter,
+        .fade-leave-to {
+            opacity: 0;
+        }
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity 3s;
+        }
         .active {
             transform-origin: left center;
             animation: bounce-in 1s;
         }
         .leave {
             transform-origin: left center;
-            animation: bounce-in 1s reverse;
+            animation: bounce-in 3s reverse;
         }
     </style>
 </head>
 <body>
     <div id="root">
         <transition 
+            :duration="{enter: 5000, leave: 10000}"
             name="fade" 
-            enter-active-class="animate__animated animate__swing" 
-            leave-active-class="animate__animated animate__backOutUp"
+            appear
+            enter-active-class="animate__animated animate__swing fade-enter-active" 
+            leave-active-class="animate__animated animate__backOutUp fade-leave-active"
+            appear-active-class="animate__animated animate__swing"
         ><div v-if="show">hello world</div> </transition>
         <button @click="handleClick">切换</button>
     </div>
