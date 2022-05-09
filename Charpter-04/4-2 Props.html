@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Props</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <counter :count="1" @inc="handleIncrease"></counter>
+        <counter :count="12" @inc="handleIncrease"></counter>
+        <div>{{ total }}</div>
+    </div>
+
+    <script>
+        var counter = {
+            props: ['count'],
+            // 单向数据流，应拷贝副本后再修改
+            data: function() {
+                return {
+                    number: this.count,
+                };
+            },
+            template: '<div @click="handleClick">{{number}}</div>',
+            methods: {
+                handleClick: function() {
+                    this.number = this.number + 2;
+                    this.$emit('inc', 2);
+                }
+            },
+        }
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                total: 13,
+            },
+            components: {
+                counter: counter,
+            },
+            methods: {
+                handleIncrease: function(step) {
+                    this.total += step;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
